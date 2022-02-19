@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import LoginForm from './component/LoginForm'
+import PostList from './component/PostList'
+const App = () => {
   return (
+    //<Grid> : 나란히 배치, 하위 컴포넌트에게는 item이라는 prop을 줘야함.
+    //<Grid xs> : auto layout, 플렉스 비트윈과 같은 역할?
+    //<Typography component="h1" variant="h5"> : 텍스트태그 같은 역할?, 실제 태그는 h1인데 디자인은 h5에 하겠다.
+    //동글동글한 ui를 원하면 avatar로 씌워주기
+    //가운데 배치는 <Box> like div
+    //xs : extra small, md : 900px
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoginForm/>
+      <PostList/>
     </div>
   );
 }

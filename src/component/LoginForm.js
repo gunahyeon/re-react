@@ -25,14 +25,13 @@ const LoginForm = () => {
 	// }
 	const submitHandler = (event) => {
 		event.preventDefault();
-		console.log(email, username);
 		/*  const loginAction = () => {
 
         } */
 	};
 	return (
 		<div>
-			<Container component="form" maxWidth="xs">
+			<Container component="div" maxWidth="xs">
 				<Box
 					sx={{
 						marginTop: 8,
@@ -44,11 +43,30 @@ const LoginForm = () => {
 					<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
 						<LockOutlinedIcon />
 					</Avatar>
-					<Typography component="h1" variant="h5">
+					<form>                     
+                        {user.loginState ? (<div>
+                            <Typography component="h1" variant="h5">
+						Hello, {user.username}.
+					</Typography>
+                            <Button
+								sx={{ mt: 2, mb: 2 }}
+								variant="contained"
+								type="submit"
+								fullWidth
+								onClick={(event) => {
+									submitHandler(event);
+                                    console.log("Logout");
+                                    dispatch(logout());
+								}}
+							>
+								Logout
+                            </Button>
+                            </div>):(
+                                <div>
+                    <Typography component="h1" variant="h5">
 						Sign in
 					</Typography>
-					<form onSubmit={submitHandler}>
-						<TextField
+                            <TextField
 							margin="normal"
 							id="email"
 							name="email"
@@ -73,39 +91,20 @@ const LoginForm = () => {
 							}}
 							autoComplete="current-password"
 						></TextField>
-						{/* <Button sx={{mt:2, mb:2}} variant='contained' type="submit" fullWidth onClick={(event) => onSubmitHandler(event)}>Sign in</Button> */}
-						{user.loginState ? (
-							<Button
-								sx={{ mt: 2, mb: 2 }}
-								variant="contained"
-								type="submit"
-								fullWidth
-								onClick={(event) => {
-									event.preventDefault();
-
-									dispatch(
-										login(
-											document.getElementById("email").value,
-											document.getElementById("username").value
-										)
-									);
-								}}
-							>
-								Logout
-							</Button>
-						) : (
-							<Button
+                            <Button
 								sx={{ mt: 2, mb: 2 }}
 								variant="contained"
 								type="submit"
 								fullWidth
 								onClick={(event) => {
 									submitHandler(event);
+                                    console.log("Login");
+                                    dispatch(login(email,username));
 								}}
 							>
 								Sign in
-							</Button>
-						)}
+                            </Button>
+                            </div>)}
 					</form>
 				</Box>
 			</Container>

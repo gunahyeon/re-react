@@ -1,7 +1,11 @@
 import './App.css';
 import LoginForm from './component/LoginForm'
 import PostList from './component/PostList'
+import { useDispatch, useSelector } from "react-redux";
+
 const App = () => {
+  const user = useSelector((state) => state.user);
+
   return (
     //<Grid> : 나란히 배치, 하위 컴포넌트에게는 item이라는 prop을 줘야함.
     //<Grid xs> : auto layout, 플렉스 비트윈과 같은 역할?
@@ -11,7 +15,7 @@ const App = () => {
     //xs : extra small, md : 900px
     <div className="App">
       <LoginForm/>
-      <PostList/>
+      {user.loginState ? <PostList/> : ""}
     </div>
   );
 }

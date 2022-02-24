@@ -1,24 +1,24 @@
-import {Container, Card, CardContent, Grid, Typography} from '@mui/material'
+import { Container, Card, CardContent, Grid, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { postShow, postHide } from "../store/post";
 import React, { useState, useEffect } from "react";
 
 const PostList = () => {
-    const user = useSelector((state) => state.user);
-    const post = useSelector((state) => state.post);
-    const [posts, setPosts] = useState([]);
-    const dispatch = useDispatch();
+	const user = useSelector((state) => state.user);
+	const post = useSelector((state) => state.post);
 
-    useEffect(() => {
-        dispatch(postShow(user.userId));
-        console.log("gd");
-        
-    }, [user.userId]);
+	const [posts, setPosts] = useState([]);
+	const dispatch = useDispatch();
 
-    console.log(post);
+	useEffect(() => {
+		dispatch(postShow(user.userId));
+		console.log("gd");
+	}, [user.userId]);
 
-    return <div>{console.log(post.arr)}</div>;
-}
+	console.log(post);
+
+	return <div>{console.log(post.arr)}</div>;
+};
 
 // <div>
 //         <Container component="article" xs={8}>
@@ -43,4 +43,11 @@ const PostList = () => {
 //             </Card>
 //         </Container>
 //     </div>
+
+/**
+ *
+ *  condition && return <div></div>
+ *
+ *  condition ? first div : null
+ */
 export default PostList;

@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../store/user";
 import React, { useState } from "react";
+import axios from "axios";
 
 const LoginForm = () => {
 	const user = useSelector((state) => state.user);
@@ -25,14 +26,29 @@ const LoginForm = () => {
 	// }
 	const submitHandler = (event) => {
 		event.preventDefault();
+		console.log(event);
 		console.log(email, username);
 		/*  const loginAction = () => {
 
         } */
 	};
+	React.useEffect(() => {
+		axios
+			.get("http://jsonplaceholder.typicode.com/users")
+			.then((response) => {
+				console.log(response.data);
+                for(var i=0; i<response.data.length; i++)
+                {
+                    
+                }
+			})
+			.catch((error) => {
+				alert("회원 정보가 없습니다. 다시 입력해주세요.");
+			});
+	}, []);
 	return (
 		<div>
-			<Container component="form" maxWidth="xs">
+			<Container maxWidth="xs">
 				<Box
 					sx={{
 						marginTop: 8,

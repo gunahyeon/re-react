@@ -26,8 +26,6 @@ const LoginForm = () => {
 	// }
 	const submitHandler = (event) => {
 		event.preventDefault();
-		console.log(event);
-		console.log(email, username);
 		/*  const loginAction = () => {
 
         } */
@@ -37,10 +35,7 @@ const LoginForm = () => {
 			.get("http://jsonplaceholder.typicode.com/users")
 			.then((response) => {
 				console.log(response.data);
-                for(var i=0; i<response.data.length; i++)
-                {
-                    
-                }
+				for (var i = 0; i < response.data.length; i++) {}
 			})
 			.catch((error) => {
 				alert("회원 정보가 없습니다. 다시 입력해주세요.");
@@ -48,7 +43,7 @@ const LoginForm = () => {
 	}, []);
 	return (
 		<div>
-			<Container maxWidth="xs">
+			<Container component="div" maxWidth="xs">
 				<Box
 					sx={{
 						marginTop: 8,
@@ -60,67 +55,70 @@ const LoginForm = () => {
 					<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
 						<LockOutlinedIcon />
 					</Avatar>
-					<Typography component="h1" variant="h5">
-						Sign in
-					</Typography>
-					<form onSubmit={submitHandler}>
-						<TextField
-							margin="normal"
-							id="email"
-							name="email"
-							label="Email Address"
-							required
-							fullWidth
-							autoComplete="email"
-							autoFocus
-							onChange={(event) => {
-								setEmail(event.target.value);
-							}}
-						></TextField>
-						<TextField
-							id="username"
-							name="username"
-							label="username"
-							type="text"
-							required
-							fullWidth
-							onChange={(event) => {
-								setUsername(event.target.value);
-							}}
-							autoComplete="current-password"
-						></TextField>
-						{/* <Button sx={{mt:2, mb:2}} variant='contained' type="submit" fullWidth onClick={(event) => onSubmitHandler(event)}>Sign in</Button> */}
+					<form>
 						{user.loginState ? (
-							<Button
-								sx={{ mt: 2, mb: 2 }}
-								variant="contained"
-								type="submit"
-								fullWidth
-								onClick={(event) => {
-									event.preventDefault();
-
-									dispatch(
-										login(
-											document.getElementById("email").value,
-											document.getElementById("username").value
-										)
-									);
-								}}
-							>
-								Logout
-							</Button>
+							<div>
+								<Typography component="h1" variant="h5">
+									Hello, {user.username}.
+								</Typography>
+								<Button
+									sx={{ mt: 2, mb: 2 }}
+									variant="contained"
+									type="submit"
+									fullWidth
+									onClick={(event) => {
+										submitHandler(event);
+										console.log("Logout");
+										dispatch(logout());
+									}}
+								>
+									Logout
+								</Button>
+							</div>
 						) : (
-							<Button
-								sx={{ mt: 2, mb: 2 }}
-								variant="contained"
-								type="submit"
-								fullWidth
-								onClick={(event) => {
-									submitHandler(event);
-								}}
-							>
-								Sign in
-							</Button>
+							<div>
+								<Typography component="h1" variant="h5">
+									Sign in
+								</Typography>
+								<TextField
+									margin="normal"
+									id="email"
+									name="email"
+									label="Email Address"
+									required
+									fullWidth
+									autoComplete="email"
+									autoFocus
+									onChange={(event) => {
+										setEmail(event.target.value);
+									}}
+								></TextField>
+								<TextField
+									id="username"
+									name="username"
+									label="username"
+									type="text"
+									required
+									fullWidth
+									onChange={(event) => {
+										setUsername(event.target.value);
+									}}
+									autoComplete="current-password"
+								></TextField>
+								<Button
+									sx={{ mt: 2, mb: 2 }}
+									variant="contained"
+									type="submit"
+									fullWidth
+									onClick={(event) => {
+										submitHandler(event);
+										console.log("Login");
+										dispatch(login(email, username));
+									}}
+								>
+									Sign in
+								</Button>
+							</div>
 						)}
 					</form>
 				</Box>

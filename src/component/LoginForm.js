@@ -14,7 +14,6 @@ import React, { useState } from "react";
 const LoginForm = () => {
 	const user = useSelector((state) => state.user);
 	const dispatch = useDispatch();
-	console.log(user);
 	const [email, setEmail] = React.useState("");
 	const [username, setUsername] = React.useState("");
 	// const onSubmitHandler = (event) => {

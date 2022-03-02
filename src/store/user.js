@@ -11,10 +11,10 @@ export const userSlice = createSlice ({
     },
     reducers:{
         LOGIN_SUCCESS:(state,action)=>{
-            console.log(action.payload.item);
-            state.email = action.payload.item.email;
-            state.username = action.payload.item.username;
-            state.userId = action.payload.item.id;
+            console.log(action.payload.value[0]);
+            state.email = action.payload.value[0].email;
+            state.username = action.payload.value[0].username;
+            state.userId = action.payload.value[0].id;
             state.loginState = true;
         },
         LOGIN_FAIL:()=>{
@@ -38,12 +38,18 @@ export const login = (email,username) => (dispatch) => {
     axios
     .get("http://jsonplaceholder.typicode.com/users")
     .then((response) => {
-        console.log(response.data);
-        response.data.filter((item)=> {
-            const value={item:item};
-            (item.email === userBody.email && item.username === userBody.username) ? 
-                dispatch(LOGIN_SUCCESS(value)) : dispatch(LOGIN_FAIL());
-        })
+        var value = response.data.filter((item)=> {
+            // console.log(item);
+            return (item.email.includes(userBody.email) && item.username.includes(userBody.username));
+            // const value={item:item};
+            // (item.email === userBody.email && item.username === userBody.username) ? 
+            //     dispatch(LOGIN_SUCCESS(value)) : dispatch(LOGIN_FAIL());
+        }).map((item)=>{
+            return item;
+         })
+        console.log(value);
+        dispatch(LOGIN_SUCCESS({value:value}));
+
     })
     .catch((error) => {
         alert("회원 정보가 없습니다. 다시 입력해주세요.");

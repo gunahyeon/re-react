@@ -9,16 +9,18 @@ export const postSlice = createSlice ({
         id:null,
         title:"",
         body:"",
-        arr:[],
     },
     reducers:{
         POST_SHOW:(state,action)=>{
-            console.log(action.payload);
-            state.userId=action.payload.item.userId;
-            state.id=action.payload.item.id;
-            state.title=action.payload.item.title;
-            state.body=action.payload.item.body;
-            state.arr=action.payload.item;
+            // state = {...state, userId:action.payload.value.userId, id:action.payload.value.id, title:action.payload.value.title, body:action.payload.value.body};
+            // state = action.payload.value.userId;
+            // state = action.payload.value.id;
+            // state = action.payload.value.title;
+            // state = action.payload.value.body;
+            state.userId = action.payload.newObject.userId;
+            state.id = action.payload.newObject.id;
+            state.title = action.payload.newObject.title;
+            state.body = action.payload.newObject.body;
         },
         POST_HIDE:()=>{
             // alert("회원 정보가 없습니다. 다시 입력해주세요.");
@@ -36,17 +38,32 @@ export const postShow = (userId) => (dispatch) => {
         }
     })
     .then((response) => {
-        response.data.filter((item)=>{
-            console.log(item);
-            const value={item:item};
-            dispatch(POST_SHOW(value));
-        })
+        const res = response.data;
+        console.log(res);
+        res.map((item)=>{
+            const newObject = {
+                userId:item.userId,
+                id:item.id,
+                title:item.title,
+                body:item.body,
+            }
+            console.log(newObject);
+            dispatch(POST_SHOW({newObject:newObject}));
+        });
+        // const newObject = {
+        //     userId:response.data.userId,
+        //     id:response.data.id,
+        //     title:response.data.title,
+        //     body:response.data.body,
+        // }
+        // dispatch(POST_SHOW({value:value}));
     })
     .catch((error) => {
         // console.log(error);
     });
 }
 export const postHide = () => (dispatch) =>{
+    dispatch(POST_HIDE());
 }
 export default postSlice.reducer;
 /**

@@ -6,18 +6,22 @@ import React, { useState, useEffect } from "react";
 const PostList = () => {
     const user = useSelector((state) => state.user);
     const post = useSelector((state) => state.post);
-    const [posts, setPosts] = useState([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(postShow(user.userId));
-        console.log("gd");
-        
     }, [user.userId]);
-
-    console.log(post);
-
-    return <div>{console.log(post.arr)}</div>;
+    const newObject={
+        userId:post.userId,
+        id:post.id,
+        title:post.title,
+        body:post.body,
+    }
+    console.log(newObject);
+    const arr = [];
+    arr.push(newObject);
+    console.log(arr);
+    return (<div></div>);
 }
 
 // <div>

@@ -17,12 +17,6 @@ const LoginForm = () => {
 	const dispatch = useDispatch();
 	const [email, setEmail] = React.useState("");
 	const [username, setUsername] = React.useState("");
-	// const onSubmitHandler = (event) => {
-	//     event.preventDefault();
-	//     console.log("ho");
-	//     dispatch(login(document.getElementById("email").value,document.getElementById("username").value));
-	//     console.log(document.getElementById("email").value,document.getElementById("username").value);
-	// }
 	const submitHandler = (event) => {
 		event.preventDefault();
 		/*  const loginAction = () => {

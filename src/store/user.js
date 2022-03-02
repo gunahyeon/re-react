@@ -21,10 +21,7 @@ export const userSlice = createSlice ({
             // alert("회원 정보가 없습니다. 다시 입력해주세요.");
         },
         LOGOUT:(state)=>{
-            state.email="";
-            state.username="";
-            state.userId=null;
-            state.loginState=false;
+
         }
     }
 });

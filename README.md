@@ -1,1 +1,11 @@
-jsonplaceholder 데이터를 활용하여 axios, react, react-redux, redux-toolkit, react-persist를 적용한 프로젝트
+# 기술스택
+* React
+* React-redux
+* React-persist
+* Redux
+* Redux-toolkit
+* Axios
+* mui
+
+# 구현 기능
+axios을 활용해 user, user에 대한 posts 불러오기
